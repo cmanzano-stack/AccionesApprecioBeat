@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rúbricas Apprecio — Mercado Pago Point 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════ APPRECIO BRAND ═══════════════════
+   Primary:   #E8174A  (Apprecio Red/Pink)
+   Dark text: #1A1A1A
+   Light bg:  #F9F9F9
+   White:     #FFFFFF
+   Grey:      #6B6B6B
+   Border:    #E4E4E4
+   Accent bg: #FFF0F4  (light pink)
+   Blue acent:#4A47E0  (engagement only)
+═══════════════════════════════════════════════════════ */
+:root {
+  --ap-red:    #E8174A;
+  --ap-red-lt: #FFF0F4;
+  --ap-red-md: #FFD6E0;
+  --ap-dark:   #1A1A1A;
+  --ap-grey:   #6B6B6B;
+  --ap-border: #E4E4E4;
+  --ap-bg:     #F9F9F9;
+  --ap-white:  #FFFFFF;
+  --eng-blue:  #2D6BE4;
+  --eng-lt:    #EEF3FD;
+  --eng-md:    #C7D9FA;
+  --green:     #27AE60;
+  --green-lt:  #E8F7F0;
+  --amber:     #D97706;
+  --amber-lt:  #FEF3C7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--ap-bg);color:var(--ap-dark);font-size:14px;line-height:1.5}
+
+/* ══ TOPBAR ══ */
+.topbar{
+  background:var(--ap-white);
+  border-bottom:1px solid var(--ap-border);
+  padding:0 32px;
+  height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;
+}
+/* Apprecio logo SVG inline */
+.ap-logo{display:flex;align-items:center;gap:10px}
+.ap-logo-text{font-size:20px;font-weight:700;color:var(--ap-red);letter-spacing:-0.3px}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.topbar-chip{
+  background:var(--ap-red-lt);color:var(--ap-red);
+  font-size:11px;font-weight:600;padding:4px 12px;
+  border-radius:100px;border:1px solid var(--ap-red-md);
+}
+
+/* ══ HERO ══ */
+.hero{
+  background:var(--ap-red);
+  padding:36px 32px 32px;
+  color:var(--ap-white);
+}
+.hero-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:1.2px;
+  text-transform:uppercase;opacity:.8;margin-bottom:10px;
+}
+.hero h1{font-size:26px;font-weight:700;line-height:1.2;margin-bottom:8px}
+.hero-sub{font-size:14px;opacity:.85;max-width:600px;line-height:1.6}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-chip{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.3);
+  color:var(--ap-white);
+  font-size:12px;font-weight:500;
+  padding:4px 12px;border-radius:100px;
+}
+
+/* ══ LAYOUT ══ */
+.layout{
+  max-width:1180px;margin:0 auto;
+  padding:28px 24px 80px;
+  display:grid;
+  grid-template-columns:1fr 310px;
+  gap:24px;
+  align-items:start;
+}
+
+/* ══ KPI STRIP ══ */
+.kpi-row{
+  grid-column:1/-1;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin-bottom:4px;
+}
+.kpi-card{
+  background:var(--ap-white);
+  border:1px solid var(--ap-border);
+  border-radius:10px;
+  padding:16px;
+  border-top:3px solid var(--ap-red);
+}
+.kpi-name{font-size:12px;font-weight:700;color:var(--ap-red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.kpi-val{font-size:18px;font-weight:700;color:var(--ap-dark);margin-bottom:2px}
+.kpi-desc{font-size:11px;color:var(--ap-grey);line-height:1.4}
+
+/* ══ PILARES ══ */
+.pilares-row{
+  grid-column:1/-1;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin-bottom:4px;
+}
+.pilar{
+  background:var(--ap-white);
+  border:1px solid var(--ap-border);
+  border-radius:10px;
+  padding:14px 16px;
+}
+.pilar-num{
+  width:28px;height:28px;border-radius:8px;
+  background:var(--ap-red);color:var(--ap-white);
+  font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:10px;
+}
+.pilar-title{font-size:13px;font-weight:700;margin-bottom:4px}
+.pilar-desc{font-size:12px;color:var(--ap-grey);line-height:1.45}
+
+/* ══ GRUPOS / CUARTILES ══ */
+.grupos-section{
+  background:var(--ap-white);
+  border:1px solid var(--ap-border);
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:20px;
+}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;
+}
+.section-title{font-size:14px;font-weight:700}
+.grupos-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.grupo{
+  border-radius:8px;padding:12px 14px;
+  display:flex;align-items:flex-start;gap:10px;
+  border:1px solid var(--ap-border);
+}
+.grupo-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.grupo-new .grupo-dot{background:var(--green)}
+.grupo-legacy .grupo-dot{background:var(--ap-grey)}
+.grupo-name{font-weight:600;font-size:13px}
+.grupo-sub{font-size:11px;color:var(--ap-grey);margin-top:1px}
+.cuartil-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cuartil{
+  border-radius:8px;padding:12px;text-align:center;
+  border:1px solid transparent;
+}
+.q1{background:#E8F7F0;border-color:#A8DFC5;color:#1A6B41}
+.q2{background:#EEF3FD;border-color:#B0CCFA;color:#1A3DA6}
+.q3{background:#FEF3C7;border-color:#FCD34D;color:#92400E}
+.q4{background:#FFF0F4;border-color:var(--ap-red-md);color:var(--ap-red)}
+.cuartil-n{font-size:20px;font-weight:700;line-height:1}
+.cuartil-l{font-size:11px;font-weight:600;margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+
+/* ══ CONTENT AREA ══ */
+.content{}
+.rubric-section{
+  background:var(--ap-white);
+  border:1px solid var(--ap-border);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:16px;
+}
+.rs-header{
+  padding:14px 18px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid var(--ap-border);
+}
+.rs-icon{
+  width:30px;height:30px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+}
+.rs-icon-venta{background:var(--ap-red-lt)}
+.rs-icon-engage{background:var(--eng-lt)}
+.rs-title{font-size:14px;font-weight:700;flex:1}
+.rs-badge{
+  font-size:11px;font-weight:600;padding:3px 10px;
+  border-radius:100px;
+}
+.rs-badge-venta{background:var(--ap-red-lt);color:var(--ap-red);border:1px solid var(--ap-red-md)}
+.rs-badge-engage{background:var(--eng-lt);color:var(--eng-blue);border:1px solid var(--eng-md)}
+.rs-body{padding:16px 18px}
+
+/* ══ MONTH BLOCK ══ */
+.month-block{margin-bottom:18px}
+.month-block:last-child{margin-bottom:0}
+.month-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.month-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ap-grey)}
+.m-tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:100px}
+.mt14{background:#FFE4EC;color:var(--ap-red)}
+.mt30{background:#FEF3C7;color:#92400E}
+.mt60{background:var(--eng-lt);color:var(--eng-blue)}
+.mt90{background:var(--green-lt);color:#1A6B41}
+.mtplus{background:#F3F3F3;color:var(--ap-grey)}
+.month-note{font-size:11px;color:var(--ap-grey);margin-left:auto;font-style:italic}
+.rubric-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* ══ RUBRIC CARD ══ */
+.rc{
+  border:1.5px solid var(--ap-border);
+  border-radius:10px;padding:12px;
+  cursor:pointer;
+  transition:border-color .12s,background .12s,box-shadow .12s;
+  position:relative;
+  background:var(--ap-white);
+}
+.rc:hover{border-color:#BBBBBB;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.rc.sel-v{border-color:var(--ap-red);background:var(--ap-red-lt)}
+.rc.sel-e{border-color:var(--eng-blue);background:var(--eng-lt)}
+.rc-check{
+  width:18px;height:18px;border-radius:4px;
+  border:2px solid var(--ap-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:var(--ap-white);
+  margin-bottom:7px;transition:all .12s;flex-shrink:0;
+}
+.rc.sel-v .rc-check{background:var(--ap-red);border-color:var(--ap-red)}
+.rc.sel-e .rc-check{background:var(--eng-blue);border-color:var(--eng-blue)}
+.rc-pts{
+  position:absolute;top:10px;right:10px;
+  font-size:11px;font-weight:700;
+  background:#F3F3F3;color:var(--ap-grey);
+  padding:2px 8px;border-radius:100px;
+  transition:all .12s;
+}
+.rc.sel-v .rc-pts{background:var(--ap-red-md);color:var(--ap-red)}
+.rc.sel-e .rc-pts{background:var(--eng-md);color:var(--eng-blue)}
+.rc-title{font-size:12px;font-weight:600;margin-bottom:3px;padding-right:60px;line-height:1.3}
+.rc-desc{font-size:11px;color:var(--ap-grey);line-height:1.45}
+
+/* ══ EDITABLE FIELDS ══ */
+.edit-btn{
+  position:absolute;bottom:8px;right:8px;
+  background:transparent;border:none;cursor:pointer;
+  font-size:13px;opacity:.35;padding:2px;
+  transition:opacity .12s;
+}
+.rc:hover .edit-btn,.rc.editing .edit-btn{opacity:.8}
+.edit-overlay{
+  display:none;
+  position:absolute;inset:0;
+  background:var(--ap-white);
+  border-radius:9px;
+  padding:10px;
+  z-index:10;
+  flex-direction:column;gap:6px;
+  border:1.5px solid var(--ap-red);
+}
+.rc.editing .edit-overlay{display:flex}
+.edit-field{
+  width:100%;padding:6px 8px;
+  border:1px solid var(--ap-border);
+  border-radius:6px;
+  font-size:12px;
+  font-family:'Inter',sans-serif;
+  outline:none;resize:none;
+}
+.edit-field:focus{border-color:var(--ap-red)}
+.edit-row{display:flex;gap:6px;margin-top:2px}
+.edit-save,.edit-cancel{
+  flex:1;padding:5px;font-size:11px;font-weight:600;
+  border:none;border-radius:5px;cursor:pointer;
+}
+.edit-save{background:var(--ap-red);color:var(--ap-white)}
+.edit-cancel{background:#F3F3F3;color:var(--ap-grey)}
+
+/* ══ SIDEBAR ══ */
+.sidebar{position:sticky;top:72px}
+
+.pts-card{
+  background:var(--ap-red);
+  border-radius:12px;padding:18px;
+  color:var(--ap-white);margin-bottom:14px;
+}
+.pts-card-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;opacity:.8;margin-bottom:6px}
+.pts-big{font-size:36px;font-weight:700;line-height:1;margin-bottom:2px}
+.pts-big.over{color:#FBBF24}
+.pts-limit{font-size:12px;opacity:.7}
+.pts-bar-track{height:5px;background:rgba(255,255,255,.25);border-radius:3px;margin-top:12px;overflow:hidden}
+.pts-bar-fill{height:100%;background:var(--ap-white);border-radius:3px;transition:width .25s}
+.pts-bar-fill.over{background:#FBBF24}
+.pts-warn{
+  margin-top:10px;font-size:12px;
+  background:rgba(0,0,0,.25);
+  padding:7px 10px;border-radius:6px;
+  display:none;
+}
+.pts-warn.show{display:block}
+/* budget detail */
+.pts-detail{margin-top:12px;border-top:1px solid rgba(255,255,255,.2);padding-top:10px}
+.pts-row{display:flex;justify-content:space-between;font-size:12px;opacity:.9;margin-bottom:4px}
+.pts-row span:last-child{font-weight:600}
+
+.summary-card{
+  background:var(--ap-white);border:1px solid var(--ap-border);
+  border-radius:12px;padding:16px;margin-bottom:14px;
+}
+.sc-title{font-size:13px;font-weight:700;margin-bottom:12px}
+.sc-empty{font-size:12px;color:var(--ap-grey);font-style:italic}
+.sc-month{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ap-grey);padding:6px 0 2px;border-bottom:none}
+.sc-item{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:6px;padding:5px 0;
+  border-bottom:1px solid #F3F3F3;font-size:12px;
+}
+.sc-item:last-child{border:none}
+.sc-total{
+  display:flex;justify-content:space-between;
+  font-size:13px;font-weight:700;
+  padding-top:8px;border-top:1.5px solid var(--ap-border);margin-top:4px;
+}
+
+.email-card{
+  background:var(--ap-white);border:1px solid var(--ap-border);
+  border-radius:12px;padding:16px;margin-bottom:12px;
+}
+.email-lbl{font-size:12px;font-weight:600;display:block;margin-bottom:6px}
+.email-note{font-size:11px;color:var(--ap-grey);margin-top:6px}
+.email-in{
+  width:100%;padding:9px 11px;
+  border:1.5px solid var(--ap-border);border-radius:7px;
+  font-size:13px;font-family:'Inter',sans-serif;
+  background:var(--ap-bg);outline:none;transition:border-color .12s;
+}
+.email-in:focus{border-color:var(--ap-red);background:var(--ap-white)}
+
+.send-btn{
+  width:100%;padding:13px;
+  background:var(--ap-red);color:var(--ap-white);
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:700;
+  border:none;border-radius:9px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:background .12s,transform .1s;
+}
+.send-btn:hover{background:#C7103D;transform:translateY(-1px)}
+.send-btn:active{transform:translateY(0)}
+.send-btn:disabled{background:#E0E0E0;color:#AAAAAA;cursor:not-allowed;transform:none}
+
+/* ══ BUDGET ALERT BOX ══ */
+.budget-note{
+  background:var(--amber-lt);
+  border:1px solid #FCD34D;
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:12px;
+  color:#78350F;
+  margin-bottom:16px;
+  line-height:1.5;
+}
+.budget-note strong{font-weight:700}
+
+/* ══ TOAST ══ */
+.toast{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:var(--ap-dark);color:var(--ap-white);
+  font-size:13px;font-weight:500;
+  padding:12px 22px;border-radius:100px;
+  opacity:0;transition:all .25s;z-index:9999;
+  white-space:nowrap;pointer-events:none;
+  border:2px solid var(--ap-red);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .kpi-row,.pilares-row{grid-template-columns:1fr 1fr}
+  .sidebar{position:static}
+  .cuartil-row{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:580px){
+  .rubric-grid{grid-template-columns:1fr}
+  .kpi-row,.pilares-row{grid-template-columns:1fr}
+  .topbar{padding:0 16px}
+  .hero{padding:24px 16px 20px}
+  .layout{padding:16px 12px 60px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="ap-logo">
+    <!-- Apprecio pixel-square logo mark -->
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="7" fill="#E8174A"/>
+      <rect x="6" y="6" width="8" height="8" fill="white"/>
+      <rect x="18" y="6" width="8" height="8" fill="white"/>
+      <rect x="6" y="18" width="8" height="8" fill="white"/>
+      <rect x="18" y="18" width="4" height="4" fill="white"/>
+    </svg>
+    <span class="ap-logo-text">apprecio</span>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-chip">Mercado Pago Point · 2026</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Panel de Gestión — FDV Tercerizada</div>
+  <h1>Constructor de Rúbricas<br>Smart Sales Growth</h1>
+  <div class="hero-sub">Selecciona, edita y envía las rúbricas del programa. Cada tarjeta es editable en nombre, descripción y puntos. Tope máximo: <strong>150.000 pts / colaborador / mes.</strong></div>
+  <div class="hero-chips">
+    <span class="hero-chip">190 vendedores · 3 agencias</span>
+    <span class="hero-chip">Inicio: 1 de junio 2026</span>
+    <span class="hero-chip">Inicio: 2.5 altas promedio actual</span>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- KPIs -->
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-name">New MAS</div>
+    <div class="kpi-val">Alta Point</div>
+    <div class="kpi-desc">Venta de máquina a cliente nuevo. Equivale a "Alta" en la BBDD del cliente.</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-name">Calidad</div>
+    <div class="kpi-val">TPV &gt; $2M</div>
+    <div class="kpi-desc">Alta M-1 con transacciones que superen $2.000.000 en TPV acumulado.</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-name">TPV M1 Total</div>
+    <div class="kpi-val">Cartera Activa</div>
+    <div class="kpi-desc">Toda la cartera de máquinas instaladas debe registrar movimiento en el mes.</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-name">Avg TPV</div>
+    <div class="kpi-val">Ticket &gt; $2M</div>
+    <div class="kpi-desc">El ticket promedio por activación debe superar los $2.000.000.</div>
+  </div>
+</div>
+
+<!-- PILARES -->
+<div class="pilares-row">
+  <div class="pilar">
+    <div class="pilar-num">1</div>
+    <div class="pilar-title">Quick Wins</div>
+    <div class="pilar-desc">Sprints y metas semanales que mantienen el foco en terreno.</div>
+  </div>
+  <div class="pilar">
+    <div class="pilar-num">2</div>
+    <div class="pilar-title">Calidad</div>
+    <div class="pilar-desc">0% anulaciones y biometría completa. Altas reales y transaccionables.</div>
+  </div>
+  <div class="pilar">
+    <div class="pilar-num">3</div>
+    <div class="pilar-title">Fidelización</div>
+    <div class="pilar-desc">Encuestas y trivias. El vendedor se siente parte del programa.</div>
+  </div>
+  <div class="pilar">
+    <div class="pilar-num">4</div>
+    <div class="pilar-title">Movilidad</div>
+    <div class="pilar-desc">Premios por subir de cuartil. Incentivo visible para crecer mes a mes.</div>
+  </div>
+</div>
+
+<!-- GRUPOS + CUARTILES -->
+<div style="grid-column:1/-1">
+  <div class="grupos-section">
+    <div class="section-head">
+      <div class="section-title">Grupos de Evaluación</div>
+      <span style="font-size:11px;color:var(--ap-grey)">Clasificación mensual según altas acumuladas</span>
+    </div>
+    <div class="grupos-grid">
+      <div class="grupo grupo-new">
+        <div class="grupo-dot"></div>
+        <div><div class="grupo-name">New</div><div class="grupo-sub">M0–M1 · primeros 2 meses en el programa</div></div>
+      </div>
+      <div class="grupo grupo-legacy">
+        <div class="grupo-dot"></div>
+        <div><div class="grupo-name">Legacy</div><div class="grupo-sub">M2+ · vendedores con historial de resultados</div></div>
+      </div>
+    </div>
+    <div class="cuartil-row">
+      <div class="cuartil q1"><div class="cuartil-n">Q1</div><div class="cuartil-l">Top — Oro</div></div>
+      <div class="cuartil q2"><div class="cuartil-n">Q2</div><div class="cuartil-l">Bueno — Plata</div></div>
+      <div class="cuartil q3"><div class="cuartil-n">Q3</div><div class="cuartil-l">En riesgo — Cobre</div></div>
+      <div class="cuartil q4"><div class="cuartil-n">Q4</div><div class="cuartil-l">Acción — Hierro</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content" id="content">
+
+<!-- NOTE ABOUT POINTS -->
+<div class="budget-note">
+  <strong>📊 Contexto de presupuesto:</strong> Con 190 colaboradores, cada 100 pts entregados universalmente representan 19.000 pts de gasto total. Las rúbricas de engagement están calibradas en rangos pequeños (100–500 pts) para que acciones básicas no consuman el presupuesto. Las metas por nivel de altas son el componente principal del pago mensual.
+</div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 1: METAS POR NIVEL DE ALTAS
+═══════════════════════════════════════ -->
+<div class="rubric-section">
+  <div class="rs-header">
+    <div class="rs-icon rs-icon-venta">🎯</div>
+    <div class="rs-title">Productividad Base — Metas por Nivel de Altas</div>
+    <span class="rs-badge rs-badge-venta">Mes a mes · automático</span>
+  </div>
+  <div class="rs-body">
+    <div class="month-block">
+      <div class="month-row">
+        <span class="month-name">Todos los meses</span>
+        <span class="m-tag mtplus">Permanente desde Junio</span>
+        <span class="month-note">Mínimo 3 altas para ganar puntos</span>
+      </div>
+      <div class="rubric-grid">
+        <div class="rc" data-type="venta" data-pts="2500" data-month="Productividad Base" data-title="Nivel Hierro (3–4 altas)" onclick="toggleCard(this)">
+          <div class="rc-check">✓</div>
+          <div class="rc-pts">2.500 pts</div>
+          <div class="rc-title">Nivel Hierro — 3 a 4 altas</div>
+          <div class="rc-desc">37 vendedores actuales en este rango. Punto de entrada al programa de incentivos.</div>
+          <button class="edit-btn" onclick="startEdit(event,this.closest('.rc'))" title="Editar">✏️</button>
+          <div class="edit-overlay">
+            <input class="edit-field" placeholder="Nombre" data-field="title">
+            <textarea class="edit-field" placeholder="Descripción" rows="2" data-field="desc"></textarea>
+            <input class="edit-field" placeholder="Puntos (solo número)" data-field="pts">
+            <div class="edit-row">
+              <button class="edit-save" onclick="saveEdit(event,this.closest('.rc'))">Guardar</button>
+              <button class="edit-cancel" onclick="cancelEdit(event,this.closest('.rc'))">Cancelar</button>
+            </div>
+          </div>
+        </div>
+        <div class="rc" data-type="venta" data-pts="6000" data-month="Productividad Base" data-title="Nivel Cobre (5–7 altas)" onclick="toggleCard(this)">
+          <div class="rc-check">✓</div>
+          <div class="rc-pts">6.000 pts</div>
+          <div class="rc-title">Nivel Cobre — 5 a 7 altas</div>
+          <div class="rc-desc">29 vendedores actuales. Rango intermedio que da acceso a rúbricas de bonos.</div>
+          <button class="edit-btn" onclick="startEdit(event,this.closest('.rc'))" title="Editar">✏️</button>
+          <div class="edit-overlay">
+            <input class="edit-field" placeholder="Nombre" data-field="title">
+            <textarea class="edit-field" placeholder="Descripción" rows="2" data-field="desc"></textarea>
+            <input class="edit-field" placeholder="Puntos (solo número)" data-field="pts">
+            <div class="edit-row">
+              <button class="edit-save" onclick="saveEdit(event,this.closest('.rc'))">Guardar</button>
+              <button class="edit-cancel" onclick="cancelEdit(event,this.closest('.rc'))">Cancelar</button>
+            </div>
+          </div>
+        </div>
+        <div class="rc" data-type="venta" data-pts="15000" data-month="Productividad Base" data-title="Nivel Bronce (8–9 altas)" onclick="toggleCard(this)">
+          <div class="rc-check">✓</div>
+          <div class="rc-pts">15.000 pts</div>
+          <div class="rc-title">Nivel Bronce — 8 a 9 altas</div>
+          <div class="rc-desc">7 vendedores actuales. Umbral de excelencia. Solo el 3.6% del equipo lo alcanza hoy.</div>
+          <button class="edit-btn" onclick="startEdit(event,this.closest('.rc'))" title="Editar">✏️</button>
+          <div class="edit-overlay">
+            <input class="edit-field" placeholder="Nombre" data-field="title">
+            <textarea class="edit-field" placeholder="Descripción" rows="2" data-field="desc"></textarea>
+            <input class="edit-field" placeholder="Puntos (solo número)" data-field="pts">
+            <div class="edit-row">
+              <button class="edit-save" onclick="saveEdit(event,this.closest('.rc'))">Guardar</button>
+              <button class="edit-cancel" onclick="cancelEdit(event,this.closest('.rc'))">Cancelar</button>
+            </div>
+          </div>
+        </div>
+        <div class="rc" data-type="venta" data-pts="25000" data-month="Productividad Base" data-title="Nivel Plata (10–11 altas)" onclick="toggleCard(this)">
+          <div class="rc-check">✓</div>
+          <div class="rc-pts">25.000 pts</div>
+          <div class="rc-title">Nivel Plata — 10 a 11 altas</div>
+          <div class="rc-desc">1 vendedor actual. Meta aspiracional para el 10% top del equipo.</div>
+          <button class="edit-btn" onclick="startEdit(event,this.closest('.rc'))" title="Editar">✏️</button>
+          <div class="edit-overlay">
+            <input class="edit-field" placeholder="Nombre" data-field="title">
+            <textarea class="edit-field" placeholder="Descripción" rows="2" data-field="desc"></textarea>
+            <input class="edit-field" placeholder="Puntos (solo número)" data-field="pts">
+            <div class="edit-row">
+              <button class="edit-save" onclick="saveEdit(event,this.closest('.rc'))">Guardar</button>
+              <button class="edit-cancel" onclick="cancelEdit(event,this.closest('.rc'))">Cancelar</button>
+            </div>
+          </div>
+        </div>
+        <div class="rc" data-type="venta" data-pts="60000" data-month="Productividad Base" data-title="Nivel Oro (12+ altas)" onclick="toggleCard(this)">
+          <div class="rc-check">✓</div>
+          <div class="rc-pts">60.000 pts</div>
+          <div class="rc-title">Nivel Oro — 12 o más altas</div>
+          <div class="rc-desc">2 vendedores actuales. Acceso al Gran Pozo Oro (~83.000 pts extra repartidos entre Q1).</div>
+          <button class="edit-btn" onclick="startEdit(event,this.closest('.rc'))" title="Editar">✏️</button>
+          <div class="edit-overlay">
+            <input class="edit-field" placeholder="Nombre" data-field="title">
+            <textarea class="edit-field" placeholder="Descripción" rows="2" data-field="desc"></textarea>
+            <input class="edit-field" placeholder="Puntos (solo número)" data-field="pts">
+            <div class="edit-row">
+              <button class="edit-save" onclick="saveEdit(event,this.closest('.rc'))">Guardar</button>
+              <button class="edit-cancel" onclick="cancelEdit(event,this.closest('.rc'))">Cancelar</button>
+            </div>
+          </div>
+        </div>
+        <div class="rc" data-type="venta" data-pts="83000" data-month="Productividad Base" data-title="Gran Pozo Oro" onclick="toggleCard(this)">
+          <div class="rc-check">✓</div>
+          <div class="rc-pts">~83.000 pts</div>
+          <div class="rc-title">Gran Pozo Oro</div>
+          <div class="rc-desc">Reparto proporcional entre todos los vendedores de nivel Oro al cierre de cada mes.</div>
+          <button class="edit-btn" onclick="startEdit(event,this.closest('.rc'))" title="Editar">✏️</button>
+          <div class="edit-overlay">
+            <input class="edit-field" placeholder="Nombre" data-field="title">
+            <textarea class="edit-field" placeholder="Descripción" rows="2" data-field="desc"></textarea>
+            <input class="edit-field" placeholder="Puntos (solo número)" data-field="pts">
+            <div class="edit-row">
+              <button class="edit-save" onclick="saveEdit(event,this.closest('.rc'))">Guardar</button>
+              <button class="edit-cancel" onclick="cancelEdit(event,this.closest('.rc'))">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 2: RÚBRICAS DE VENTA/METAS
+═══════════════════════════════════════ -->
+<div class="rubric-section">
+  <div class="rs-header">
+    <div class="rs-icon rs-icon-venta">📈</div>
+    <div class="rs-title">Rúbricas de Venta y Sprints</div>
+    <span class="rs-badge rs-badge-venta">Complementarias a niveles</span>
+  </div>
+  <div class="rs-body">
+
+    <div class="month-block">
+      <div class="month-row"><span class="month-name">Junio</span><span class="m-tag mt14">T+14 — Activación</span></div>
+      <div class="rubric-grid" id="grid-jun-v"></div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-row"><span class="month-name">Julio</span><span class="m-tag mt30">T+30 — Movilidad</span></div>
+      <div class="rubric-grid" id="grid-jul-v"></div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-row"><span class="month-name">Agosto</span><span class="m-tag mt60">T+60 — Engagement</span></div>
+      <div class="rubric-grid" id="grid-ago-v"></div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-row"><span class="month-name">Septiembre — Diciembre</span><span class="m-tag mt90">T+90 en adelante</span></div>
+      <div class="rubric-grid" id="grid-sep-v"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 3: ENGAGEMENT
+═══════════════════════════════════════ -->
+<div class="rubric-section">
+  <div class="rs-header">
+    <div class="rs-icon rs-icon-engage">💡</div>
+    <div class="rs-title">Rúbricas de Engagement con la Plataforma</div>
+    <span class="rs-badge rs-badge-engage">No vinculadas a venta directa</span>
+  </div>
+  <div class="rs-body">
+    <div style="font-size:12px;color:var(--ap-grey);margin-bottom:14px;padding:10px 12px;background:#F9F9F9;border-radius:7px;border:1px solid var(--ap-border)">
+      ⚠️ <strong>Calibración de puntos:</strong> Rúbricas básicas (foto, check-in) están intencionalmente bajas (100–300 pts). 190 colaboradores × 300 pts = 57.000 pts de gasto. Si subes a 1.000 pts universales = 190.000 pts solo en acciones mínimas. Ajusta según el presupuesto total disponible.
+    </div>
+
+    <div class="month-block">
+      <div class="month-row"><span class="month-name">Onboarding</span><span class="m-tag mt14">Primera vez · único</span></div>
+      <div class="rubric-grid" id="grid-onb-e"></div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-row"><span class="month-name">Uso Mensual</span><span class="m-tag mt30">Recurrente</span></div>
+      <div class="rubric-grid" id="grid-mes-e"></div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-row"><span class="month-name">Encuestas y Feedback</span><span class="m-tag mt60">Trimestral</span></div>
+      <div class="rubric-grid" id="grid-enc-e"></div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-row"><span class="month-name">Reconocimiento y Comunidad</span><span class="m-tag mt90">Especiales</span></div>
+      <div class="rubric-grid" id="grid-rec-e"></div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+  <div class="pts-card">
+    <div class="pts-card-label">Pts. Seleccionados / Colaborador</div>
+    <div class="pts-big" id="pts-num">0</div>
+    <div class="pts-limit">Tope: 150.000 pts / mes</div>
+    <div class="pts-bar-track"><div class="pts-bar-fill" id="pts-bar" style="width:0%"></div></div>
+    <div class="pts-detail">
+      <div class="pts-row"><span>🎯 Venta / Metas</span><span id="pts-venta">0</span></div>
+      <div class="pts-row"><span>💡 Engagement</span><span id="pts-engage">0</span></div>
+      <div class="pts-row" style="border-top:1px solid rgba(255,255,255,.2);padding-top:6px;margin-top:4px"><span>🏭 Gasto total × 190</span><span id="pts-total-budget">0</span></div>
+    </div>
+    <div class="pts-warn" id="pts-warn">⚠️ Supera 150.000 pts. Ajusta la selección para no exceder el tope por colaborador.</div>
+  </div>
+
+  <div class="summary-card">
+    <div class="sc-title">Selección actual</div>
+    <div id="sc-body"><p class="sc-empty">Marca rúbricas para ver el resumen.</p></div>
+  </div>
+
+  <button class="send-btn" id="send-btn" onclick="sendEmail()">
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Enviar Selección
+  </button>
+</div>
+
+</div><!-- /layout -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA: rubric definitions
+// ══════════════════════════════════════════
+const RUBRICS = {
+  'grid-jun-v': [
+    {type:'venta',pts:5000,month:'Junio',title:'Acelerador 11–17',desc:'Bono por 4 altas Point en la semana del 11 al 17 de junio.'},
+    {type:'venta',pts:1500,month:'Junio',title:'Sprint Cierre de Mes',desc:'Puntos extra por cada alta en los últimos 3 días del mes.'},
+    {type:'venta',pts:1000,month:'Junio',title:'Reto Primera Alta + Biometría',desc:'1.000 pts por la primera alta con biometría 100% completa.'},
+    {type:'venta',pts:2000,month:'Junio',title:'Calidad de Alta',desc:'2.000 pts si el mes cierra con 0% de anulaciones.'},
+  ],
+  'grid-jul-v': [
+    {type:'venta',pts:4000,month:'Julio',title:'Bono Salto de Cuartil',desc:'4.000 pts por subir de cuartil respecto al mes anterior (ej: Q3 → Q2).'},
+    {type:'venta',pts:3000,month:'Julio',title:'Bono Rescate',desc:'3.000 pts para vendedores que reactiven altas caídas del mes anterior.'},
+    {type:'venta',pts:500,month:'Julio',title:'Misión AM',desc:'500 pts extra por cada alta registrada antes de las 13:00 hrs.'},
+    {type:'venta',pts:30000,month:'Julio',title:'Sorteo Q1/Q2',desc:'30.000 pts sorteados entre vendedores Q1/Q2 sin anulaciones en el mes.'},
+  ],
+  'grid-ago-v': [
+    {type:'venta',pts:5000,month:'Agosto',title:'Mes Biometría Digital',desc:'Bono por 100% de altas con biometría digital completa en agosto.'},
+    {type:'venta',pts:2000,month:'Agosto',title:'Sprint 48h Sorpresa',desc:'Misión secreta revelada el lunes: objetivo a completar en 48 horas.'},
+    {type:'venta',pts:3500,month:'Agosto',title:'Premio Equipo a Cobre',desc:'Premio colectivo si todos los integrantes del equipo alcanzan nivel Cobre.'},
+  ],
+  'grid-sep-v': [
+    {type:'venta',pts:10000,month:'Septiembre–Diciembre',title:'Dieciochera',desc:'10.000 pts por 5 altas Point registradas antes del 18 de septiembre.'},
+    {type:'venta',pts:2000,month:'Septiembre–Diciembre',title:'Reactivación Post-Feriado',desc:'2.000 pts por alta efectiva en la semana post-Fiestas Patrias.'},
+    {type:'venta',pts:2000,month:'Septiembre–Diciembre',title:'Sprint Q4',desc:'Bono por 4 altas en semana específica de octubre (por definir).'},
+    {type:'venta',pts:3000,month:'Septiembre–Diciembre',title:'Constancia de Nivel',desc:'3.000 pts por mantener Q1 o Q2 durante 3 meses consecutivos.'},
+    {type:'venta',pts:20000,month:'Septiembre–Diciembre',title:'Sorteo Primera Alta Mes',desc:'Primera alta de cada mes = ticket para sorteo de 20.000 pts.'},
+  ],
+  'grid-onb-e': [
+    {type:'engage',pts:300,month:'Onboarding',title:'Perfil Completo (foto + datos)',desc:'Completar foto y datos básicos del perfil. Acción única. 190 × 300 = 57.000 pts totales.'},
+    {type:'engage',pts:500,month:'Onboarding',title:'Entrenamiento Bienvenida',desc:'Completar el módulo de onboarding de Apprecio (5–7 pasos).'},
+    {type:'engage',pts:800,month:'Onboarding',title:'Certificación Producto Point',desc:'Completar el entrenamiento "Venta de Valor" con nota ≥70%.'},
+    {type:'engage',pts:250,month:'Onboarding',title:'Encuesta de Diagnóstico Inicial',desc:'Responder encuesta de conocimiento de producto y contexto de terreno.'},
+  ],
+  'grid-mes-e': [
+    {type:'engage',pts:100,month:'Uso Mensual',title:'Check-in Semanal (×4)',desc:'100 pts por ingresar al portal cada semana. Máx 400 pts/mes. 190 × 400 = 76.000 pts.'},
+    {type:'engage',pts:300,month:'Uso Mensual',title:'Trivia Comercial Mensual',desc:'Responder la trivia de producto Point. 190 × 300 = 57.000 pts si todos participan.'},
+    {type:'engage',pts:200,month:'Uso Mensual',title:'Compartir Tip de Terreno',desc:'Publicar un tip útil en la comunidad. Se estima participación del 30% (57 vendors).'},
+    {type:'engage',pts:150,month:'Uso Mensual',title:'Ver Progreso de Meta',desc:'Ingresar y revisar el scorecard mensual propio. Simple, bajo costo, alto hábito.'},
+  ],
+  'grid-enc-e': [
+    {type:'engage',pts:500,month:'Encuestas',title:'Encuesta de Terreno',desc:'Feedback real sobre barreras y objeciones. Trimestral. 190 × 500 = 95.000 pts.'},
+    {type:'engage',pts:400,month:'Encuestas',title:'Encuesta Comprensión de Metas',desc:'¿Entiendes tu meta? Disparada automáticamente al ver metas por primera vez.'},
+    {type:'engage',pts:600,month:'Encuestas',title:'Encuesta Clima Laboral',desc:'Mide sentido de pertenencia y riesgo de rotación. Trimestral.'},
+    {type:'engage',pts:400,month:'Encuestas',title:'Encuesta Uso App Apprecio',desc:'Evaluación de la plataforma en terreno. Semestral.'},
+  ],
+  'grid-rec-e': [
+    {type:'engage',pts:800,month:'Reconocimiento',title:'Nominar Partner del Mes',desc:'Reconocer a un compañero por apoyo o desempeño destacado.'},
+    {type:'engage',pts:400,month:'Reconocimiento',title:'Trivia Cultura Empresa',desc:'Preguntas sobre Apprecio, beneficios del programa y mecánicas.'},
+    {type:'engage',pts:600,month:'Reconocimiento',title:'Feedback Cierre de Año',desc:'Encuesta de evaluación del programa al cierre de diciembre.'},
+    {type:'engage',pts:500,month:'Reconocimiento',title:'Adviento Diciembre',desc:'500 pts × día por misiones de advent calendar. 1–24 diciembre.'},
+  ],
+};
+
+// ══════════════════════════════════════════
+// BUILD CARDS DYNAMICALLY
+// ══════════════════════════════════════════
+function buildCards(){
+  Object.entries(RUBRICS).forEach(([gridId, items])=>{
+    const grid = document.getElementById(gridId);
+    if(!grid) return;
+    grid.innerHTML = '';
+    items.forEach((r,i)=>{
+      const id = `rc-${gridId}-${i}`;
+      grid.insertAdjacentHTML('beforeend', cardHTML(id, r));
+    });
+  });
+}
+
+function cardHTML(id, r){
+  const fmtPts = Number(r.pts).toLocaleString('es-CL');
+  return `<div class="rc" id="${id}" data-type="${r.type}" data-pts="${r.pts}" data-month="${r.month}" data-title="${r.title}" onclick="toggleCard(this)">
+    <div class="rc-check">✓</div>
+    <div class="rc-pts">${fmtPts} pts</div>
+    <div class="rc-title">${r.title}</div>
+    <div class="rc-desc">${r.desc}</div>
+    <button class="edit-btn" onclick="startEdit(event,this.closest('.rc'))" title="Editar rúbrica">✏️</button>
+    <div class="edit-overlay">
+      <input class="edit-field" placeholder="Nombre de la rúbrica" data-field="title">
+      <textarea class="edit-field" placeholder="Descripción" rows="2" data-field="desc"></textarea>
+      <input class="edit-field" placeholder="Puntos (solo número)" data-field="pts" type="number">
+      <div class="edit-row">
+        <button class="edit-save" onclick="saveEdit(event,this.closest('.rc'))">Guardar</button>
+        <button class="edit-cancel" onclick="cancelEdit(event,this.closest('.rc'))">Cancelar</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════
+// TOGGLE SELECT
+// ══════════════════════════════════════════
+function toggleCard(el){
+  if(el.classList.contains('editing')) return;
+  const type = el.dataset.type;
+  const cls = type==='venta' ? 'sel-v' : 'sel-e';
+  el.classList.toggle(cls);
+  updateSidebar();
+}
+
+// ══════════════════════════════════════════
+// EDIT FUNCTIONALITY
+// ══════════════════════════════════════════
+function startEdit(e, card){
+  e.stopPropagation();
+  card.classList.add('editing');
+  const ov = card.querySelector('.edit-overlay');
+  ov.querySelector('[data-field="title"]').value = card.dataset.title;
+  ov.querySelector('[data-field="desc"]').value  = card.querySelector('.rc-desc').textContent;
+  ov.querySelector('[data-field="pts"]').value   = card.dataset.pts;
+}
+function saveEdit(e, card){
+  e.stopPropagation();
+  const ov = card.querySelector('.edit-overlay');
+  const newTitle = ov.querySelector('[data-field="title"]').value.trim();
+  const newDesc  = ov.querySelector('[data-field="desc"]').value.trim();
+  const newPts   = parseInt(ov.querySelector('[data-field="pts"]').value) || 0;
+  if(!newTitle){ showToast('El nombre no puede estar vacío.'); return; }
+  card.dataset.title = newTitle;
+  card.dataset.pts   = newPts;
+  card.querySelector('.rc-title').textContent = newTitle;
+  card.querySelector('.rc-desc').textContent  = newDesc;
+  card.querySelector('.rc-pts').textContent   = newPts.toLocaleString('es-CL') + ' pts';
+  card.classList.remove('editing');
+  updateSidebar();
+  showToast('✓ Rúbrica actualizada');
+}
+function cancelEdit(e, card){
+  e.stopPropagation();
+  card.classList.remove('editing');
+}
+
+// ══════════════════════════════════════════
+// SIDEBAR UPDATE
+// ══════════════════════════════════════════
+const MAX = 150000;
+const N_COLABS = 190;
+
+function getSelected(){
+  return [...document.querySelectorAll('.rc.sel-v, .rc.sel-e')].map(c=>({
+    type:  c.dataset.type,
+    pts:   parseInt(c.dataset.pts)||0,
+    month: c.dataset.month,
+    title: c.dataset.title || c.querySelector('.rc-title').textContent,
+  }));
+}
+
+function updateSidebar(){
+  const sel = getSelected();
+  const total    = sel.reduce((s,r)=>s+r.pts, 0);
+  const ventatot = sel.filter(r=>r.type==='venta').reduce((s,r)=>s+r.pts,0);
+  const engtot   = sel.filter(r=>r.type==='engage').reduce((s,r)=>s+r.pts,0);
+  const budget   = total * N_COLABS;
+
+  document.getElementById('pts-num').textContent   = total.toLocaleString('es-CL');
+  document.getElementById('pts-num').classList.toggle('over', total>MAX);
+  document.getElementById('pts-venta').textContent = ventatot.toLocaleString('es-CL');
+  document.getElementById('pts-engage').textContent= engtot.toLocaleString('es-CL');
+  document.getElementById('pts-total-budget').textContent = budget.toLocaleString('es-CL');
+
+  const bar = document.getElementById('pts-bar');
+  bar.style.width = Math.min((total/MAX)*100,100)+'%';
+  bar.classList.toggle('over', total>MAX);
+  document.getElementById('pts-warn').classList.toggle('show', total>MAX);
+
+  // summary
+  const body = document.getElementById('sc-body');
+  if(sel.length===0){
+    body.innerHTML='<p class="sc-empty">Marca rúbricas para ver el resumen.</p>';
+    return;
+  }
+  const byMonth={};
+  sel.forEach(r=>{
+    if(!byMonth[r.month]) byMonth[r.month]=[];
+    byMonth[r.month].push(r);
+  });
+  let html='';
+  Object.entries(byMonth).forEach(([m,items])=>{
+    html+=`<div class="sc-month">${m}</div>`;
+    items.forEach(r=>{
+      const c = r.type==='venta'?'var(--ap-red)':'var(--eng-blue)';
+      html+=`<div class="sc-item"><span style="flex:1;line-height:1.3">${r.title}</span><span style="color:${c};font-weight:600;white-space:nowrap">${r.pts.toLocaleString('es-CL')} pts</span></div>`;
+    });
+  });
+  html+=`<div class="sc-total"><span>Total / colab.</span><span style="color:${total>MAX?'var(--ap-red)':'var(--ap-dark)'}">${total.toLocaleString('es-CL')} pts</span></div>`;
+  html+=`<div style="font-size:11px;color:var(--ap-grey);margin-top:4px">Gasto total estimado (×${N_COLABS}): <strong>${budget.toLocaleString('es-CL')} pts</strong></div>`;
+  body.innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// APPS SCRIPT ENDPOINT — pega tu URL aquí
+// ══════════════════════════════════════════
+// ── EMAIL ENDPOINT ──────────────────────────────────────────
+// Usa Formspree (gratis, funciona en GitHub Pages sin backend):
+// 1. Ve a https://formspree.io → Signup gratis
+// 2. Crea un nuevo form → pon cmanzano@apprecio.com como destino
+// 3. Copia tu endpoint (ej: https://formspree.io/f/xyzABCDE)
+// 4. Pégalo abajo ↓
+const APPS_SCRIPT_URL = 'https://formspree.io/f/REEMPLAZAR_CON_TU_ID';
+
+async function sendEmail(){
+  const sel = getSelected();
+  if(sel.length === 0){ showToast('Selecciona al menos una rúbrica antes de enviar.'); return; }
+
+  const btn = document.getElementById('send-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="white" stroke-width="1.5" stroke-dasharray="4 2"><animateTransform attributeName="transform" type="rotate" from="0 7.5 7.5" to="360 7.5 7.5" dur="0.8s" repeatCount="indefinite"/></circle></svg> Enviando…';
+
+  const total   = sel.reduce((s,r)=>s+r.pts, 0);
+  const budget  = total * N_COLABS;
+  const overLim = total > MAX;
+  const ventas  = sel.filter(r=>r.type==='venta');
+  const engages = sel.filter(r=>r.type==='engage');
+
+  // Build plain-text body for the email
+  let emailBody = `Hola Carlos,\n\n`;
+  emailBody += `Selección de rúbricas — Programa Smart Sales Growth · Mercado Pago Point 2026.\n\n`;
+  emailBody += `════════════════════════════════════\n`;
+  emailBody += `RESUMEN ECONÓMICO\n`;
+  emailBody += `────────────────────────────────────\n`;
+  emailBody += `Puntos por colaborador : ${total.toLocaleString('es-CL')} pts${overLim?' ⚠️ SUPERA TOPE 150.000':' ✓'}\n`;
+  emailBody += `Tope máximo            : 150.000 pts / colaborador / mes\n`;
+  emailBody += `Gasto total (×190)     : ${budget.toLocaleString('es-CL')} pts\n`;
+  emailBody += `════════════════════════════════════\n\n`;
+
+  if(ventas.length > 0){
+    emailBody += `🎯 RÚBRICAS DE VENTA Y METAS (${ventas.length})\n`;
+    emailBody += `────────────────────────────────────\n`;
+    const byM = {};
+    ventas.forEach(r=>{ if(!byM[r.month]) byM[r.month]=[]; byM[r.month].push(r); });
+    Object.entries(byM).forEach(([m,its])=>{
+      emailBody += `\n[${m}]\n`;
+      its.forEach(r=> emailBody += `  • ${r.title}: ${r.pts.toLocaleString('es-CL')} pts\n`);
+    });
+    emailBody += `\nSubtotal venta: ${ventas.reduce((s,r)=>s+r.pts,0).toLocaleString('es-CL')} pts\n\n`;
+  }
+
+  if(engages.length > 0){
+    emailBody += `💡 RÚBRICAS DE ENGAGEMENT (${engages.length})\n`;
+    emailBody += `────────────────────────────────────\n`;
+    const byM = {};
+    engages.forEach(r=>{ if(!byM[r.month]) byM[r.month]=[]; byM[r.month].push(r); });
+    Object.entries(byM).forEach(([m,its])=>{
+      emailBody += `\n[${m}]\n`;
+      its.forEach(r=> emailBody += `  • ${r.title}: ${r.pts.toLocaleString('es-CL')} pts\n`);
+    });
+    emailBody += `\nSubtotal engagement: ${engages.reduce((s,r)=>s+r.pts,0).toLocaleString('es-CL')} pts\n\n`;
+  }
+
+  emailBody += `════════════════════════════════════\n`;
+  emailBody += `4 PILARES\n`;
+  emailBody += `  1. Quick Wins — Sprints y metas semanales\n`;
+  emailBody += `  2. Calidad — 0% anulaciones + biometría\n`;
+  emailBody += `  3. Fidelización — Encuestas y trivias\n`;
+  emailBody += `  4. Movilidad — Premios por subir de cuartil\n`;
+  emailBody += `════════════════════════════════════\n\n`;
+  emailBody += `KPIs del cliente:\n`;
+  emailBody += `  • New MAS     : Alta Point = venta de máquina a cliente nuevo\n`;
+  emailBody += `  • Calidad     : Alta M-1 con TPV > $2.000.000\n`;
+  emailBody += `  • TPV M1 Total: toda la cartera con movimiento en el mes\n`;
+  emailBody += `  • Avg TPV     : ticket promedio > $2.000.000\n\n`;
+  emailBody += `Generado: ${new Date().toLocaleString('es-CL')}\n`;
+
+  const payload = {
+    subject: `Selección Rúbricas MP Point 2026 — ${total.toLocaleString('es-CL')} pts/colab`,
+    body: emailBody,
+    totalPts: total,
+    budgetTotal: budget,
+    overLimit: overLim,
+    rubricas: sel,
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: payload.subject,
+        message: payload.body,
+        total_pts: payload.totalPts,
+        budget_total: payload.budgetTotal,
+        over_limit: payload.overLimit ? 'SÍ ⚠️' : 'No',
+        rubricas_count: payload.rubricas.length,
+        timestamp: payload.timestamp,
+        detalle: JSON.stringify(payload.rubricas, null, 2)
+      })
+    });
+    const json = await res.json();
+    if(json.ok){
+      showToast('✅ Selección enviada a cmanzano@apprecio.com');
+      btn.innerHTML = '✅ Enviado';
+      btn.style.background = 'var(--green)';
+      setTimeout(()=>{
+        btn.disabled = false;
+        btn.style.background = '';
+        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Enviar Selección';
+      }, 4000);
+    } else {
+      throw new Error(json.message || 'Error desconocido');
+    }
+  } catch(err) {
+    console.error(err);
+    showToast('⚠️ Error al enviar. Verifica la URL del Apps Script.');
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Enviar Selección';
+  }
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+// ══ INIT ══
+buildCards();
+updateSidebar();
+
+// Also wire up static cards in "Productividad Base" section
+document.querySelectorAll('.rubric-section .rc').forEach(el=>{
+  if(!el.id) el.id = 'rc-static-'+Math.random().toString(36).slice(2,7);
+});
+</script>
+</body>
+</html>
