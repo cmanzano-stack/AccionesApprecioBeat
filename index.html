@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -916,13 +917,9 @@ function updateSidebar(){
 // ══════════════════════════════════════════
 // APPS SCRIPT ENDPOINT — pega tu URL aquí
 // ══════════════════════════════════════════
-// ── EMAIL ENDPOINT ──────────────────────────────────────────
-// Usa Formspree (gratis, funciona en GitHub Pages sin backend):
-// 1. Ve a https://formspree.io → Signup gratis
-// 2. Crea un nuevo form → pon cmanzano@apprecio.com como destino
-// 3. Copia tu endpoint (ej: https://formspree.io/f/xyzABCDE)
-// 4. Pégalo abajo ↓
-const APPS_SCRIPT_URL = 'https://formspree.io/f/REEMPLAZAR_CON_TU_ID';
+// ── n8n WEBHOOK ─────────────────────────────────────────────
+// Pega aquí la URL Production del webhook de n8n:
+const WEBHOOK_URL = 'PEGAR_URL_WEBHOOK_N8N_AQUI';
 
 async function sendEmail(){
   const sel = getSelected();
@@ -998,25 +995,13 @@ async function sendEmail(){
   };
 
   try {
-    const res = await fetch(APPS_SCRIPT_URL, {
+    const res = await fetch(WEBHOOK_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        _subject: payload.subject,
-        message: payload.body,
-        total_pts: payload.totalPts,
-        budget_total: payload.budgetTotal,
-        over_limit: payload.overLimit ? 'SÍ ⚠️' : 'No',
-        rubricas_count: payload.rubricas.length,
-        timestamp: payload.timestamp,
-        detalle: JSON.stringify(payload.rubricas, null, 2)
-      })
+      headers: { 'Content-Type': 'text/plain' }, // Apps Script needs this to avoid CORS preflight
+      body: JSON.stringify(payload)
     });
     const json = await res.json();
-    if(json.ok){
+    if(json.status === 'ok'){
       showToast('✅ Selección enviada a cmanzano@apprecio.com');
       btn.innerHTML = '✅ Enviado';
       btn.style.background = 'var(--green)';
@@ -1030,7 +1015,7 @@ async function sendEmail(){
     }
   } catch(err) {
     console.error(err);
-    showToast('⚠️ Error al enviar. Verifica la URL del Apps Script.');
+    showToast('⚠️ Error al enviar. Verifica que el webhook de n8n esté activo.');
     btn.disabled = false;
     btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Enviar Selección';
   }
