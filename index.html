@@ -182,6 +182,16 @@ body{font-family:'Inter',sans-serif;background:var(--ap-bg);color:var(--ap-dark)
 /* BUDGET NOTE */
 .budget-note{background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:10px 12px;font-size:12px;color:#78350F;margin-bottom:16px;line-height:1.5}
 
+.cc-card{background:var(--ap-white);border:1px solid var(--ap-border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.cc-label{font-size:12px;font-weight:600;display:block;margin-bottom:6px;color:var(--ap-dark)}
+.cc-input{width:100%;padding:9px 11px;border:1.5px solid var(--ap-border);border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;background:var(--ap-bg);outline:none;transition:border-color .12s}
+.cc-input:focus{border-color:var(--ap-red);background:var(--ap-white)}
+.action-btns{display:flex;gap:8px;margin-bottom:0}
+.save-btn{flex:0 0 auto;padding:13px 16px;background:var(--ap-white);color:var(--ap-dark);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;border:1.5px solid var(--ap-border);border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .12s;white-space:nowrap}
+.save-btn:hover{border-color:var(--ap-dark);background:#F5F5F5}
+.save-btn.saved{border-color:var(--green);color:var(--green);background:var(--green-lt)}
+.send-btn{flex:1}
+
 /* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--ap-dark);color:#fff;font-size:13px;font-weight:500;padding:12px 22px;border-radius:100px;opacity:0;transition:all .25s;z-index:9999;white-space:nowrap;pointer-events:none;border:2px solid var(--ap-red)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -359,10 +369,20 @@ body{font-family:'Inter',sans-serif;background:var(--ap-bg);color:var(--ap-dark)
     <div class="sc-title">Selección actual</div>
     <div id="sc-body"><p class="sc-empty">Marca rúbricas para ver el resumen.</p></div>
   </div>
-  <button class="send-btn" id="send-btn" onclick="sendEmail()">
-    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Enviar Selección
-  </button>
+  <div class="cc-card">
+    <label class="cc-label" for="cc-input">Tu correo (copia de respaldo)</label>
+    <input class="cc-input" id="cc-input" type="email" placeholder="tu@correo.com">
+  </div>
+  <div class="action-btns">
+    <button class="save-btn" id="save-btn" onclick="saveState()">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h8l2 2v8a1 1 0 01-1 1H3a1 1 0 01-1-1V2z" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="9" width="6" height="4" rx=".5" stroke="currentColor" stroke-width="1.3"/><rect x="4" y="2" width="5" height="3" rx=".5" stroke="currentColor" stroke-width="1.3"/></svg>
+      Guardar
+    </button>
+    <button class="send-btn" id="send-btn" onclick="sendEmail()">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Enviar
+    </button>
+  </div>
 </div>
 
 </div><!-- /layout -->
@@ -702,6 +722,82 @@ function updateSidebar() {
 }
 
 // ════════════════════════════════════════
+// SAVE STATE (localStorage)
+// ════════════════════════════════════════
+const SAVE_KEY = 'apprecio_rubric_state';
+
+function saveState() {
+  const btn = document.getElementById('save-btn');
+  try {
+    // Serialize all cards from every grid
+    const grids = {};
+    document.querySelectorAll('.rubric-grid').forEach(grid => {
+      grids[grid.id] = [...grid.querySelectorAll('.rc')].map(card => ({
+        type:     card.dataset.type,
+        pts:      parseInt(card.dataset.pts) || 0,
+        month:    card.dataset.month,
+        title:    card.dataset.title || card.querySelector('.rc-title').textContent.trim(),
+        desc:     card.querySelector('.rc-desc').textContent.trim(),
+        selected: card.classList.contains('sel-v') || card.classList.contains('sel-e'),
+      }));
+    });
+
+    const state = {
+      grids,
+      grupo,
+      cc: document.getElementById('cc-input').value.trim(),
+      savedAt: new Date().toISOString(),
+    };
+    localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+
+    btn.classList.add('saved');
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Guardado';
+    showToast('✅ Cambios guardados localmente');
+    setTimeout(() => {
+      btn.classList.remove('saved');
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h8l2 2v8a1 1 0 01-1 1H3a1 1 0 01-1-1V2z" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="9" width="6" height="4" rx=".5" stroke="currentColor" stroke-width="1.3"/><rect x="4" y="2" width="5" height="3" rx=".5" stroke="currentColor" stroke-width="1.3"/></svg> Guardar';
+    }, 3000);
+  } catch(e) {
+    showToast('⚠️ No se pudo guardar. Verifica permisos del navegador.');
+  }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) return false;
+    const state = JSON.parse(raw);
+
+    // Restore grids
+    if (state.grids) {
+      Object.entries(state.grids).forEach(([gridId, cards]) => {
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
+        grid.innerHTML = '';
+        cards.forEach(r => {
+          const card = makeCard(r, gridId);
+          if (r.selected) {
+            card.classList.add(r.type === 'venta' ? 'sel-v' : 'sel-e');
+          }
+          grid.appendChild(card);
+        });
+        initDropZone(grid);
+      });
+    }
+
+    // Restore grupo
+    if (state.grupo) selectGrupo(state.grupo);
+
+    // Restore CC
+    if (state.cc) document.getElementById('cc-input').value = state.cc;
+
+    return true;
+  } catch(e) {
+    return false;
+  }
+}
+
+// ════════════════════════════════════════
 // SEND EMAIL via n8n
 // ════════════════════════════════════════
 async function sendEmail() {
@@ -747,6 +843,8 @@ async function sendEmail() {
   resumen += '\n4 Pilares: Quick Wins · Calidad · Fidelización · Movilidad';
   resumen += '\nKPIs: New MAS · Calidad TPV >$2M · TPV M1 Total · Avg TPV >$2M';
 
+  const cc = document.getElementById('cc-input').value.trim();
+
   const payload = {
     subject:     'Selección Rúbricas MP Point 2026 — ' + fmt(total) + (grupo ? ' · Grupo ' + grupo.toUpperCase() : ''),
     resumen,
@@ -755,6 +853,7 @@ async function sendEmail() {
     budgetTotal: budget,
     overLimit:   overLim,
     rubricas:    sel,
+    cc:          cc || null,
     timestamp:   new Date().toISOString()
   };
 
@@ -791,7 +890,8 @@ function showToast(msg) {
 // ════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════
-buildCards();
+const hadSaved = loadState();
+if (!hadSaved) buildCards();
 updateSidebar();
 </script>
 </body>
