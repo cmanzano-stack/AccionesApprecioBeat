@@ -926,95 +926,74 @@ async function sendEmail(){
 
   const btn = document.getElementById('send-btn');
   btn.disabled = true;
-  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="white" stroke-width="1.5" stroke-dasharray="4 2"><animateTransform attributeName="transform" type="rotate" from="0 7.5 7.5" to="360 7.5 7.5" dur="0.8s" repeatCount="indefinite"/></circle></svg> Enviando…';
+  btn.textContent = 'Enviando…';
 
-  const total   = sel.reduce((s,r)=>s+r.pts, 0);
+  const total   = sel.reduce((s,r) => s + r.pts, 0);
   const budget  = total * N_COLABS;
   const overLim = total > MAX;
-  const ventas  = sel.filter(r=>r.type==='venta');
-  const engages = sel.filter(r=>r.type==='engage');
+  const ventas  = sel.filter(r => r.type === 'venta');
+  const engages = sel.filter(r => r.type === 'engage');
 
-  // Build plain-text body for the email
-  let emailBody = `Hola Carlos,\n\n`;
-  emailBody += `Selección de rúbricas — Programa Smart Sales Growth · Mercado Pago Point 2026.\n\n`;
-  emailBody += `════════════════════════════════════\n`;
-  emailBody += `RESUMEN ECONÓMICO\n`;
-  emailBody += `────────────────────────────────────\n`;
-  emailBody += `Puntos por colaborador : ${total.toLocaleString('es-CL')} pts${overLim?' ⚠️ SUPERA TOPE 150.000':' ✓'}\n`;
-  emailBody += `Tope máximo            : 150.000 pts / colaborador / mes\n`;
-  emailBody += `Gasto total (×190)     : ${budget.toLocaleString('es-CL')} pts\n`;
-  emailBody += `════════════════════════════════════\n\n`;
+  function fmtPts(n){ return Number(n).toLocaleString('es-CL') + ' pts'; }
+
+  // Build text summary
+  let resumen = '';
+  resumen += 'Puntos por colaborador : ' + fmtPts(total) + (overLim ? ' ⚠️ SUPERA TOPE 150.000' : ' ✓') + '\n';
+  resumen += 'Tope máximo            : 150.000 pts / colaborador / mes\n';
+  resumen += 'Gasto total (×190)     : ' + fmtPts(budget) + '\n';
 
   if(ventas.length > 0){
-    emailBody += `🎯 RÚBRICAS DE VENTA Y METAS (${ventas.length})\n`;
-    emailBody += `────────────────────────────────────\n`;
+    resumen += '\n🎯 RÚBRICAS DE VENTA Y METAS\n';
     const byM = {};
-    ventas.forEach(r=>{ if(!byM[r.month]) byM[r.month]=[]; byM[r.month].push(r); });
-    Object.entries(byM).forEach(([m,its])=>{
-      emailBody += `\n[${m}]\n`;
-      its.forEach(r=> emailBody += `  • ${r.title}: ${r.pts.toLocaleString('es-CL')} pts\n`);
+    ventas.forEach(r => { if(!byM[r.month]) byM[r.month]=[]; byM[r.month].push(r); });
+    Object.entries(byM).forEach(([m, its]) => {
+      resumen += '[' + m + ']\n';
+      its.forEach(r => resumen += '  • ' + r.title + ': ' + fmtPts(r.pts) + '\n');
     });
-    emailBody += `\nSubtotal venta: ${ventas.reduce((s,r)=>s+r.pts,0).toLocaleString('es-CL')} pts\n\n`;
   }
-
   if(engages.length > 0){
-    emailBody += `💡 RÚBRICAS DE ENGAGEMENT (${engages.length})\n`;
-    emailBody += `────────────────────────────────────\n`;
+    resumen += '\n💡 RÚBRICAS DE ENGAGEMENT\n';
     const byM = {};
-    engages.forEach(r=>{ if(!byM[r.month]) byM[r.month]=[]; byM[r.month].push(r); });
-    Object.entries(byM).forEach(([m,its])=>{
-      emailBody += `\n[${m}]\n`;
-      its.forEach(r=> emailBody += `  • ${r.title}: ${r.pts.toLocaleString('es-CL')} pts\n`);
+    engages.forEach(r => { if(!byM[r.month]) byM[r.month]=[]; byM[r.month].push(r); });
+    Object.entries(byM).forEach(([m, its]) => {
+      resumen += '[' + m + ']\n';
+      its.forEach(r => resumen += '  • ' + r.title + ': ' + fmtPts(r.pts) + '\n');
     });
-    emailBody += `\nSubtotal engagement: ${engages.reduce((s,r)=>s+r.pts,0).toLocaleString('es-CL')} pts\n\n`;
   }
-
-  emailBody += `════════════════════════════════════\n`;
-  emailBody += `4 PILARES\n`;
-  emailBody += `  1. Quick Wins — Sprints y metas semanales\n`;
-  emailBody += `  2. Calidad — 0% anulaciones + biometría\n`;
-  emailBody += `  3. Fidelización — Encuestas y trivias\n`;
-  emailBody += `  4. Movilidad — Premios por subir de cuartil\n`;
-  emailBody += `════════════════════════════════════\n\n`;
-  emailBody += `KPIs del cliente:\n`;
-  emailBody += `  • New MAS     : Alta Point = venta de máquina a cliente nuevo\n`;
-  emailBody += `  • Calidad     : Alta M-1 con TPV > $2.000.000\n`;
-  emailBody += `  • TPV M1 Total: toda la cartera con movimiento en el mes\n`;
-  emailBody += `  • Avg TPV     : ticket promedio > $2.000.000\n\n`;
-  emailBody += `Generado: ${new Date().toLocaleString('es-CL')}\n`;
+  resumen += '\n4 Pilares: Quick Wins · Calidad · Fidelización · Movilidad';
+  resumen += '\nKPIs: New MAS · Calidad TPV >$2M · TPV M1 Total · Avg TPV >$2M';
 
   const payload = {
-    subject: `Selección Rúbricas MP Point 2026 — ${total.toLocaleString('es-CL')} pts/colab`,
-    body: emailBody,
-    totalPts: total,
+    subject:     'Selección Rúbricas MP Point 2026 — ' + fmtPts(total),
+    resumen:     resumen,
+    totalPts:    total,
     budgetTotal: budget,
-    overLimit: overLim,
-    rubricas: sel,
-    timestamp: new Date().toISOString()
+    overLimit:   overLim,
+    rubricas:    sel,
+    timestamp:   new Date().toISOString()
   };
 
   try {
     const res = await fetch(WEBHOOK_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain' }, // Apps Script needs this to avoid CORS preflight
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const json = await res.json();
-    if(json.status === 'ok'){
-      showToast('✅ Selección enviada a cmanzano@apprecio.com');
-      btn.innerHTML = '✅ Enviado';
-      btn.style.background = 'var(--green)';
-      setTimeout(()=>{
-        btn.disabled = false;
-        btn.style.background = '';
-        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Enviar Selección';
-      }, 4000);
-    } else {
-      throw new Error(json.message || 'Error desconocido');
-    }
+
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+
+    showToast('✅ Selección enviada a cmanzano@apprecio.com');
+    btn.textContent = '✅ Enviado';
+    btn.style.background = 'var(--green)';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.style.background = '';
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Enviar Selección';
+    }, 4000);
+
   } catch(err) {
-    console.error(err);
-    showToast('⚠️ Error al enviar. Verifica que el webhook de n8n esté activo.');
+    console.error('Webhook error:', err);
+    showToast('⚠️ Error al enviar. Revisa que el webhook de n8n esté activo.');
     btn.disabled = false;
     btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 1.5L1.5 7L6.5 8M13 1.5L8.5 13.5L6.5 8M13 1.5L6.5 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Enviar Selección';
   }
